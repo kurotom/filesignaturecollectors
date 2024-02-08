@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Run command line interface of PyConcatSRT.
+Run command line interface of filesignaturecollectors.
 """
 
 
@@ -37,18 +37,14 @@ def main():
     )
 
     parser.add_argument(
-        '-f',
         '--to_file',
         action='store_true',
-        default='file_signatures',
         help='Save the data into a file.',
     )
 
     parser.add_argument(
-        '-db',
         '--to_db',
         action='store_true',
-        default='file_signatures.sqlite',
         help='Save the data into a sqlite db.',
     )
 
@@ -59,8 +55,6 @@ def main():
     gck = args.gck
     to_file = args.to_file
     to_db = args.to_db
-
-    # print(all, wiki, gck, to_file, to_db)
 
     # Initializes the counter.
     control = Controller()
@@ -84,15 +78,18 @@ def main():
         parser.print_help()
         sys.exit()
 
-    # gets the list of formatted items for storage.
+        # gets the list of formatted items for storage.
     data_formatted = control.get_dict_data()
 
-    if to_file:
-        # saves to normal file.
-        control.to_file(data=data_formatted)
+    if any([to_file, to_db]):
+        if to_file:
+            # saves to normal file.
+            control.to_file(data=data_formatted)
 
-    if to_db:
-        # saves to sqlite file.
+        if to_db:
+            # saves to sqlite file.
+            control.to_db(data=data_formatted)
+    else:
         control.to_db(data=data_formatted)
 
 
