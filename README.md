@@ -59,5 +59,5 @@ An easy way to get file signatures.
 
 # Sources
 
-> [GCK page - File Signatures](https://www.garykessler.net/library/file_sigs.html)
-> [Wikipedia - File Signatures](https://en.wikipedia.org/wiki/List_of_file_signatures)
+> * [GCK page - File Signatures](https://www.garykessler.net/library/file_sigs.html)
+> * [Wikipedia - File Signatures](https://en.wikipedia.org/wiki/List_of_file_signatures)
