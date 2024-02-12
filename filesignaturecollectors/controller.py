@@ -13,6 +13,7 @@ from filesignaturecollectors.models import FileMagicData
 from filesignaturecollectors.utils.listfilemagicdata import ListFileMagicData
 
 from typing import List, Tuple, TypeVar, Union
+import itertools
 
 
 FileMagicDataDict = TypeVar('FileMagicDataDict')
@@ -43,9 +44,9 @@ class Controller:
         *listsFileMagicData: List[FileMagicData]
     ) -> int:
         if len(listsFileMagicData) >= 2:
-            listData = []
-            for listItem in listsFileMagicData:
-                listData += listItem
+
+            listData = list(itertools.chain(*listsFileMagicData))
+
             for item in listData:
                 self.data.to_save(
                         file_extentions=item.file_extentions,

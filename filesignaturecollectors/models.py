@@ -3,10 +3,11 @@
 Models
 """
 
-from typing import TypeVar, Union
+from typing import TypeVar, Union, List
+from uuid import uuid1
 
 FileMagicDataInstace = TypeVar('FileMagicDataInstace')
-uuid4Hex = TypeVar('uuid4Hex')
+uuid4HexStr = TypeVar('uuid4HexStr')
 
 
 class FileMagicData:
@@ -14,17 +15,17 @@ class FileMagicData:
 
     def __init__(
         self,
-        id: uuid4Hex,
-        hex_signature: str = None,
-        file_extentions: str = None,
-        ascii_signature: str = None,
-        file_description: str = None,
-        byte_offset: int = None,
+        id: uuid4HexStr,
+        hex_signature: Union[str, List[str]] = None,
+        file_extentions: Union[str, List[str]] = None,
+        ascii_signature: Union[str, List[str]] = None,
+        file_description: Union[str, List[str]] = None,
+        byte_offset: Union[int, str, List[str]] = None,
         notes: str = None,
         notes_hex_signs: str = None
     ):
         self.idx = None
-        self.id = id
+        self.id = self.objID(id_hash=id)
         self.hex_signature = hex_signature
         self.file_extentions = file_extentions
         self.ascii_signature = ascii_signature
@@ -32,6 +33,15 @@ class FileMagicData:
         self.byte_offset = byte_offset
         self.notes = notes
         self.notes_hex_signs = notes_hex_signs
+
+    def objID(
+        self,
+        id_hash: str
+    ) -> str:
+        if id_hash is None:
+            return uuid1().hex
+        else:
+            return id_hash
 
     def compare(
         self,
@@ -43,12 +53,29 @@ class FileMagicData:
 
     def join_items(
         self,
-        data: list
-    ) -> Union[str | None]:
+        data: list,
+        lower: bool = False
+    ) -> Union[list | None]:
         if type(data) is list:
-            return '|'.join(data)
+            black_list = [
+                    'empty archive',
+                    'spanned archive',
+                    'little-endian',
+                    'big-endian',
+                ]
+            new_data = []
+            for item in data:
+                if item not in black_list:
+                    if lower:
+                        new_data.append(item.lower().strip())
+                    else:
+                        new_data.append(item.strip())
+            return '|'.join(new_data)
         else:
-            return None
+            if type(data) is None:
+                return '%d' % data.lower()
+            else:
+                return 'null'
 
     def to_dict(self) -> dict:
         return {
@@ -56,7 +83,10 @@ class FileMagicData:
             'hex_signature': self.join_items(data=self.hex_signature),
             'byte_offset': self.join_items(self.byte_offset),
             'ascii_signature': self.join_items(self.ascii_signature),
-            'file_extentions': self.join_items(self.file_extentions),
+            'file_extentions': self.join_items(
+                                        self.file_extentions,
+                                        lower=True
+                                    ),
             'file_description': self.file_description,
             'notes': self.notes,
             'notes_hex_signs': self.join_items(self.notes_hex_signs)

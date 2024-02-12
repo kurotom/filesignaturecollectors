@@ -61,6 +61,8 @@ class ListFileMagicData(list):
                 self.hex_codes.append(hexsign)
                 self.add_item(objInstace=fileMagic)
 
+
+
     def add_item(
         self,
         objInstace: FileMagicDataObj

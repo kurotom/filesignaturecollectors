@@ -15,6 +15,7 @@ The file is saved with the name `file_signatures` default, and you can give
 another filename if you wish.
 """
 
+
 from typing import Tuple, TypeVar
 
 
@@ -34,27 +35,24 @@ class ToFile:
     ) -> None:
         data_string = ''
 
-        data_string += '%s\t%s\t%s\t%s\t%s\n' % (
+        data_string += '%s\t%s\t%s\n' % (
                     'hex_signature',
                     'byte_offset',
-                    'ascii_signature',
-                    'file_extentions',
-                    'file_description'
+                    'file_extentions'
                 )
 
         for item in tupleFileMagicDict:
             hex_signature = item['hex_signature']
             byte_offset = item['byte_offset']
-            ascii_signature = item['ascii_signature']
             file_extentions = item['file_extentions']
-            file_description = item['file_description']
 
-            s = '%s\t%s\t%s\t%s\t%s' % (
+            if file_extentions is None:
+                file_extentions = 'null'
+
+            s = '%s\t%s\t%s' % (
                             hex_signature,
                             byte_offset,
-                            ascii_signature,
-                            file_extentions,
-                            file_description
+                            file_extentions
                         )
             data_string += s.strip() + '\n'
 

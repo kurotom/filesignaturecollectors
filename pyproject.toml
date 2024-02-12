@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "filesignaturecollectors"
-version = "0.1.1"
+version = "0.1.2"
 description = "Collects, processes and stores information on 'magic numbers'."
 authors = ["kurotom <55354389+kurotom@users.noreply.github.com>"]
 readme = "README.md"

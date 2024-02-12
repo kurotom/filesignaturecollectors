@@ -124,6 +124,7 @@ class GCKFileSignatures:
         data = data.replace(']', '')
         data = data.replace('byte offset', '')
         data = data.strip()
+        data = data.replace(',', '')
         data = data.split(' ')
         return data
 
@@ -143,7 +144,7 @@ class GCKFileSignatures:
 
                     hex_signs_data = self.clear_hex_sign(data=hex_signs)
                     ascii_signs_data = self.get_clear_data(data=ascii_signs)
-                    byte_offset_data = None
+                    byte_offset_data = 0
 
                     if hex_signs_data[0].startswith('['):
                         byte_offset_data = self.get_bytes_offset(
@@ -179,6 +180,11 @@ class GCKFileSignatures:
                     file_description = content_tr.select(
                                                 'td:nth-child(3)'
                                             )[0].text
+
+                    x = content_tr.select('td:nth-child(3)')[0]
+                    for it in x.find_all('br'):
+                        it.replace_with(' ')
+                    file_description = x.get_text().strip()
 
                     if fileMagicLast.file_extentions is None:
                         fileMagicLast.file_extentions = file_extentions_data
