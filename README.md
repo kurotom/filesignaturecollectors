@@ -5,6 +5,12 @@ Project focused on obtaining, processing and storing information related to "mag
 
 You can save the data in a normal file (`file_signatures` - default) or in a sqlite file (`file_signatures.sqlite` - default).
 
+>
+> Note:
+> In the `Byte Offset` field, if it appears:
+>     * `-512` => last 512 bytes.
+>     * `+=188` => every 188th bytes.
+> 
 
 # Install
 

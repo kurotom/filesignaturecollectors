@@ -4,6 +4,12 @@ Class gets information from:
 `https://en.wikipedia.org/wiki/List_of_file_signatures`.
 
 ISO-8859-1/latin-1
+
+
+Notes:
+* Byte Offset
+    * '-512' => last 512 bytes.
+    * '+=188' =>  every 188th bytes.
 """
 
 
@@ -127,13 +133,33 @@ class WikiFileSignatures:
 
                 offset_data = self.encode_and_clear(data=offset)
 
+                string_offset_data = ''.join(offset_data)
+
+                if 'end' in string_offset_data:
+                    final_offset_data = ['-512']
+                elif 'run-in' in string_offset_data:
+                    final_offset_data = [offset_data[0].split(' ')[0]]
+                elif 'every' in string_offset_data:
+                    final_offset_data = ['+=188']
+                elif 'BOM' in string_offset_data:
+                    final_offset_data = [offset_data[0]]
+                elif '0x' in string_offset_data:
+                    final_offset_data = [
+                                            str(int(i, 16))
+                                            for i in offset_data
+                                        ]
+                else:
+                    final_offset_data = [offset_data[0]]
+
+                # print(final_offset_data)
+
                 fileMagic = FileMagicData(
                                 id=uuid1().hex,
                                 hex_signature=hexsign_data,
                                 file_extentions=file_extention_data,
                                 ascii_signature=ascii_sign_data,
                                 file_description=description,
-                                byte_offset=offset_data,
+                                byte_offset=final_offset_data,
                                 notes=None,
                                 notes_hex_signs=None
                             )

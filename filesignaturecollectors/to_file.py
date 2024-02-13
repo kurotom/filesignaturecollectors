@@ -13,6 +13,11 @@ Columns:
 
 The file is saved with the name `file_signatures` default, and you can give
 another filename if you wish.
+
+Notes:
+* Byte Offset
+    * '-512' => last 512 bytes.
+    * '+=188' =>  every 188th bytes.
 """
 
 

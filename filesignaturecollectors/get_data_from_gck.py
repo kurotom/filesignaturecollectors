@@ -125,7 +125,10 @@ class GCKFileSignatures:
         data = data.replace('byte offset', '')
         data = data.strip()
         data = data.replace(',', '')
-        data = data.split(' ')
+        if 'At a cluster boundary' in data:
+            data = '-1'
+        else:
+            data = data.split(' ')[0]
         return data
 
     def get_content_trs(self) -> int:
