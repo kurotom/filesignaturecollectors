@@ -75,7 +75,7 @@ class FileMagicData:
             if type(data) is None:
                 return '%d' % data.lower()
             else:
-                return 'null'
+                return '0'
 
     def to_dict(self) -> dict:
         return {
