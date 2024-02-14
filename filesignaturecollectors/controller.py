@@ -19,7 +19,7 @@ import itertools
 FileMagicDataDict = TypeVar('FileMagicDataDict')
 
 
-class Controller:
+class CollectorController:
 
     def __init__(self):
         self.db = ToSqlite3()
@@ -93,6 +93,10 @@ class Controller:
 
     def to_file(
         self,
-        data: Tuple[FileMagicDataDict]
+        data: Tuple[FileMagicDataDict],
+        path: str = '.'
     ) -> None:
-        self.file.to_file(tupleFileMagicDict=data)
+        self.file.to_file(
+                tupleFileMagicDict=data,
+                path=path
+            )

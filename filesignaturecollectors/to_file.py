@@ -20,7 +20,7 @@ Notes:
     * '+=188' =>  every 188th bytes.
 """
 
-
+import os
 from typing import Tuple, TypeVar
 
 
@@ -36,7 +36,8 @@ class ToFile:
 
     def to_file(
         self,
-        tupleFileMagicDict: Tuple[FileMagicDataDict]
+        tupleFileMagicDict: Tuple[FileMagicDataDict],
+        path: str = '.'
     ) -> None:
         data_string = ''
 
@@ -61,7 +62,8 @@ class ToFile:
                         )
             data_string += s.strip() + '\n'
 
-        self.write(file_name=self.filename, data=data_string)
+        dest_path = os.path.join(path, self.filename)
+        self.write(file_name=dest_path, data=data_string)
 
     def write(
         self,

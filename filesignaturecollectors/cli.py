@@ -7,7 +7,7 @@ Run command line interface of filesignaturecollectors.
 import sys
 import argparse
 
-from filesignaturecollectors.controller import Controller
+from filesignaturecollectors.controller import CollectorController
 
 
 def main():
@@ -57,7 +57,7 @@ def main():
     to_db = args.to_db
 
     # Initializes the counter.
-    control = Controller()
+    control = CollectorController()
 
     # gets data from source.
     if all or wiki and gck:

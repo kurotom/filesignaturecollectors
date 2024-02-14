@@ -1,4 +1,4 @@
-from filesignaturecollectors.controller import Controller
+from filesignaturecollectors.controller import CollectorController
 from filesignaturecollectors.get_data_from_gck import GCKFileSignatures
 from filesignaturecollectors.get_data_from_wiki import WikiFileSignatures
 from filesignaturecollectors.to_sqlite3 import ToSqlite3
