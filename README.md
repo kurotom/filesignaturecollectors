@@ -8,8 +8,8 @@ You can save the data in a normal file (`file_signatures` - default) or in a sql
 >
 > Note:
 > In the `Byte Offset` field, if it appears:
->     * `-512` => last 512 bytes.
->     * `+=188` => every 188th bytes.
+>    * `-512` => last 512 bytes.
+>    * `+=188` => every 188th bytes.
 > 
 
 # Install
