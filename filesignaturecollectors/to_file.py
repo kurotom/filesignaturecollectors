@@ -20,6 +20,8 @@ Notes:
     * '+=188' =>  every 188th bytes.
 """
 
+from filesignaturecollectors.utils.store_data import get_platform
+
 import os
 from typing import Tuple, TypeVar
 
@@ -32,7 +34,14 @@ class ToFile:
         self,
         filename: str = 'file_signatures'
     ):
-        self.filename = filename
+        self.ROOT_DIRECTORY = get_platform()
+        self.filename = self.__buil_path(filename=filename)
+
+    def __buil_path(
+        self,
+        filename: str
+    ) -> str:
+        return os.path.join(self.ROOT_DIRECTORY, filename)
 
     def to_file(
         self,

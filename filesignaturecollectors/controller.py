@@ -3,6 +3,12 @@
 Controller.
 Responsible for managing the workflow between the collection and storage
 classes.
+
+Data location:
+    * Linux: `~/.config/filesignaturecollectors`
+    * Windows: `%APPDATA%\\Roaming\\filesignaturecollectors\\`
+    * Mac: `~/Library/Application Support/filesignaturecollectors/`
+
 """
 
 from filesignaturecollectors.get_data_from_gck import GCKFileSignatures

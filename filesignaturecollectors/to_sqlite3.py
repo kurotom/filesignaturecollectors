@@ -19,7 +19,10 @@ Columns:
 """
 
 
+from filesignaturecollectors.utils.store_data import get_platform
+
 import sqlite3
+import os
 from typing import Tuple, TypeVar
 
 
@@ -34,18 +37,18 @@ class ToSqlite3:
         db_path: str = 'file_signatures.sqlite'
     ) -> None:
         self.name_table = 'file_signatures'
-        self.db_path = self.__db_name(filename=db_path)
+        self.ROOT_DIRECTORY = get_platform()
+        self.db_path = self.__db_name_path(filename=db_path)
         self.connection = None
         self.cursor = None
 
-    def __db_name(
+    def __db_name_path(
         self,
         filename: str
     ) -> str:
         if not filename.endswith('.sqlite'):
-            return filename + '.sqlite'
-        else:
-            return filename
+            filename = filename + '.sqlite'
+        return os.path.join(self.ROOT_DIRECTORY, filename)
 
     def connectDB(self) -> sqlite3.Connection:
         self.connection = sqlite3.connect(self.db_path)
