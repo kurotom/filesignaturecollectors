@@ -34,8 +34,6 @@ def get_platform() -> str:
 
     abs_path = os.path.abspath(dir_path)
 
-    print(abs_path)
-
     if not os.path.exists(abs_path):
         os.makedirs(abs_path)
 
