@@ -27,13 +27,13 @@ def main():
         '-w',
         '--wiki',
         action='store_true',
-        help='Gets data from all collectors.',
+        help='Gets data from Wikipedia.',
     )
     parser.add_argument(
         '-g',
         '--gck',
         action='store_true',
-        help='Gets data from all collectors.',
+        help='Gets data from GCK page.',
     )
 
     parser.add_argument(

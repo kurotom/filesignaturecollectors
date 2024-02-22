@@ -10,7 +10,7 @@ You can save the data in a normal file (`file_signatures` - default) or in a sql
 > In the `Byte Offset` field, if it appears:
 >    * `-512` => last 512 bytes.
 >    * `+=188` => every 188th bytes.
-> 
+>
 
 # Install
 
@@ -47,19 +47,20 @@ c.to_db(data=data_formatted)
 
 ```bash
 $ collectfilesignatures -h
-usage: collectfilesignatures [-h] [-a] [-w] [-g] [-f] [-db]
+usage: collectfilesignatures [-h] [-a] [-w] [-g] [--to_file] [--to_db]
 
 Collect file signatures from sources.
 
 options:
-  -h, --help     show this help message and exit
-  -a, --all      Gets data from all collectors.
-  -w, --wiki     Gets data from all collectors.
-  -g, --gck      Gets data from all collectors.
-  -f, --to_file  Save the data into a file.
-  -db, --to_db   Save the data into a sqlite db.
+  -h, --help  show this help message and exit
+  -a, --all   Gets data from all collectors.
+  -w, --wiki  Gets data from Wikipedia.
+  -g, --gck   Gets data from GCK page.
+  --to_file   Save the data into a file.
+  --to_db     Save the data into a sqlite db.
 
 An easy way to get file signatures.
+
 ```
 
 
